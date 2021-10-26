@@ -1,7 +1,9 @@
 package com.afs.restfulapi.Company;
 
 import com.afs.restfulapi.Company.Company;
+import com.afs.restfulapi.Employee.Employee;
 import com.afs.restfulapi.Employee.EmployeeNotFoundException;
+import org.hibernate.sql.Update;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -42,5 +44,16 @@ public class CompanyRepository {
         this.Companies.add(company);
         return company;
 
+    }
+
+    public Company saveCompany(Integer id, Company updatedCompany) {
+        this.deleteCompany(id);
+        this.Companies.add(updatedCompany);
+        return updatedCompany;
+    }
+
+    public void deleteCompany(Integer id) {
+        Company company = findById(id);
+        Companies.remove(company);
     }
 }

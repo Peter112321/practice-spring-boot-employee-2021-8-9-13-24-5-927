@@ -1,6 +1,7 @@
 package com.afs.restfulapi.Company;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,6 +18,11 @@ public class CompanyController {
     @GetMapping
     public List<Company> getComponyList() {
         return new CompanyRepository().findAll();
+    }
+
+    @GetMapping
+    public Company getComponyListById(@PathVariable Integer id){
+        return new CompanyRepository().findById(id);
     }
 
 }

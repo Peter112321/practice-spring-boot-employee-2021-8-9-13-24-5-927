@@ -16,4 +16,7 @@ public class Company {
 
     }
 
+    public Integer getCompanyId() {
+        return companyId;
+    }
 }

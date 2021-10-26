@@ -1,6 +1,7 @@
 package com.afs.restfulapi.Company;
 
 import com.afs.restfulapi.Company.Company;
+import com.afs.restfulapi.Employee.EmployeeNotFoundException;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -22,4 +23,13 @@ public class CompanyRepository {
         return Companies;
 
     }
+
+    public Company findById(Integer id) {
+        return Companies.stream()
+                .filter(company -> company.getCompanyId() == id)
+                .findFirst()
+                .orElseThrow(CompanyNotFoundException::new);
+    }
+
+
 }

@@ -1,4 +1,4 @@
-package com.afs.restfulapi;
+package com.afs.restfulapi.Employee;
 
 import java.util.function.Supplier;
 

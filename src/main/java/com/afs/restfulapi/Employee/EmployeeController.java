@@ -1,4 +1,4 @@
-package com.afs.restfulapi;
+package com.afs.restfulapi.Employee;
 
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;

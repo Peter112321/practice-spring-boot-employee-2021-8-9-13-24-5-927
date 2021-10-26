@@ -1,4 +1,4 @@
-package com.afs.restfulapi;
+package com.afs.restfulapi.Employee;
 
 public class Employee {
     private Integer id;

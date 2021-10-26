@@ -32,4 +32,15 @@ public class CompanyRepository {
     }
 
 
+    public Company createCompany(Company company) {
+        Integer newId = Companies.stream()
+                .mapToInt(Company::getCompanyId)
+                .max()
+                .orElse(0) + 1;
+        //todo
+        Company.setCompanyId(newId);
+        this.Companies.add(company);
+        return company;
+
+    }
 }

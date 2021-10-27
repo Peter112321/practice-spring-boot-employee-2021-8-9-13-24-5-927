@@ -3,10 +3,13 @@ package com.afs.restfulapi.Company;
 import com.afs.restfulapi.Company.Company;
 import com.afs.restfulapi.Employee.Employee;
 import com.afs.restfulapi.Employee.EmployeeNotFoundException;
+import com.afs.restfulapi.Employee.EmployeeRepository;
 import org.hibernate.sql.Update;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -37,12 +40,18 @@ public class CompanyRepository {
     }
 
 
+    public List<Company> findByCompanyName(String CompanyName) {
+        return Companies.stream()
+                .filter(Company -> Company.getCompanyName()
+                        .equals(CompanyName))
+                .collect(Collectors.toList());
+    }
+
     public Company createCompany(Company company) {
         Integer newId = Companies.stream()
                 .mapToInt(Company::getCompanyId)
                 .max()
                 .orElse(0) + 1;
-        //todo
         company.setCompanyId(newId);
         this.Companies.add(company);
         return company;

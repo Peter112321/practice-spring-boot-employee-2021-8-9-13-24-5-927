@@ -1,6 +1,7 @@
 package com.afs.restfulapi.Company;
 
 import com.afs.restfulapi.Employee.Employee;
+import com.afs.restfulapi.Employee.EmployeeRepository;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -28,6 +29,11 @@ public class CompanyController {
         return new CompanyRepository().findById(id);
     }
 
+    @GetMapping("/gender")
+    public List<Company> getEmployeeByCompanyName(@RequestParam("CompanyName") String CompanyName) {
+        return new EmployeeRepository().findByCompanyName(CompanyName);
+    }
+
     @GetMapping(params = {"page", "size"})
     public PageImpl<Company> findPagingCompanies(@PageableDefault Pageable pageable) {
         return this.companyRepository.findPagingCompanies(pageable);
@@ -49,7 +55,7 @@ public class CompanyController {
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCompany(@PathVariable Integer id){
+    public void deleteCompany(@PathVariable Integer id) {
         this.companyRepository.deleteCompany(id);
     }
 

@@ -1,15 +1,10 @@
-package com.afs.restfulapi.Company;
+package com.afs.restfulapi.Repository;
 
-import com.afs.restfulapi.Company.Company;
-import com.afs.restfulapi.Employee.Employee;
-import com.afs.restfulapi.Employee.EmployeeNotFoundException;
-import com.afs.restfulapi.Employee.EmployeeRepository;
-import org.hibernate.sql.Update;
+import com.afs.restfulapi.Entity.Company;
+import com.afs.restfulapi.Exception.CompanyNotFoundException;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -18,12 +13,17 @@ import java.util.stream.Collectors;
 @Repository
 public class CompanyRepository {
 
-    private final List<Company> Companies = new ArrayList<>();
+    private List<Company> Companies;
 
     public CompanyRepository() {
-        Companies.add(new Company(1, "A"));
-        Companies.add(new Company(2, "B"));
-        Companies.add(new Company(3, "C"));
+        this.Companies = new ArrayList<>();
+//        Companies.add(new Company(1, "A"));
+//        Companies.add(new Company(2, "B"));
+//        Companies.add(new Company(3, "C"));
+    }
+
+    public void reset() {
+        this.Companies.clear();
     }
 
 

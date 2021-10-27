@@ -1,6 +1,4 @@
-package com.afs.restfulapi.Company;
-
-import com.afs.restfulapi.Employee.Employee;
+package com.afs.restfulapi.Entity;
 
 import java.util.List;
 

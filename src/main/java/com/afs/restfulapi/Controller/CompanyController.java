@@ -1,7 +1,7 @@
-package com.afs.restfulapi.Company;
+package com.afs.restfulapi.Controller;
 
-import com.afs.restfulapi.Employee.Employee;
-import com.afs.restfulapi.Employee.EmployeeRepository;
+import com.afs.restfulapi.Entity.Company;
+import com.afs.restfulapi.Repository.CompanyRepository;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -30,8 +30,8 @@ public class CompanyController {
     }
 
     @GetMapping("/gender")
-    public List<Company> getEmployeeByCompanyName(@RequestParam("CompanyName") String CompanyName) {
-        return new EmployeeRepository().findByCompanyName(CompanyName);
+    public List<Company> findByCompanyName(@RequestParam("CompanyName") String CompanyName) {
+        return new CompanyRepository().findByCompanyName(CompanyName);
     }
 
     @GetMapping(params = {"page", "size"})

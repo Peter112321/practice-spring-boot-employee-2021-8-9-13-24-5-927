@@ -4,10 +4,13 @@ import com.afs.restfulapi.Company.Company;
 import com.afs.restfulapi.Employee.Employee;
 import com.afs.restfulapi.Employee.EmployeeNotFoundException;
 import org.hibernate.sql.Update;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Repository
 public class CompanyRepository {
@@ -40,7 +43,7 @@ public class CompanyRepository {
                 .max()
                 .orElse(0) + 1;
         //todo
-        Company.setCompanyId(newId);
+        company.setCompanyId(newId);
         this.Companies.add(company);
         return company;
 
@@ -55,5 +58,14 @@ public class CompanyRepository {
     public void deleteCompany(Integer id) {
         Company company = findById(id);
         Companies.remove(company);
+    }
+
+    public PageImpl<Company> findPagingCompanies(Pageable pageable) {
+        List<Company> page = this.Companies.stream()
+                .skip((long) pageable.getPageNumber() * pageable.getPageSize())
+                .limit(pageable.getPageSize())
+                .collect(Collectors.toList());
+        return new PageImpl<>(page, pageable, this.Companies.size());
+
     }
 }

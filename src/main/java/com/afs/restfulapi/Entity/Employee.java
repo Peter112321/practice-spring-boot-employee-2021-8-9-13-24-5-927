@@ -1,7 +1,17 @@
 package com.afs.restfulapi.Entity;
 
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Employee {
-    private Integer id;
+    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    private Integer id ;
     private String name;
     private Integer age;
     private String gender;
@@ -13,6 +23,9 @@ public class Employee {
         this.age = age;
         this.gender = gender;
         this.salary = salary;
+    }
+
+    public Employee() {
     }
 
     public Integer getId() {

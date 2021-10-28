@@ -1,7 +1,10 @@
 package com.afs.restfulapi.Service;
 
 import com.afs.restfulapi.Entity.Employee;
+import com.afs.restfulapi.Exception.EmployeeNotFoundException;
 import com.afs.restfulapi.Repository.EmployeeRepository;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,30 +18,34 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeeList() {
-        return this.employeeRepository.getEmployeeList();
+        return this.employeeRepository.findAll();
     }
 
     public Employee getEmployeeById(int id) {
-        return this.employeeRepository.getEmployeeById(id);
+        return this.employeeRepository.findById(id).orElseThrow(EmployeeNotFoundException::new);
     }
 
-    public List<Employee> getEmployeeListByPage(int page, int pageSize) {
-        return this.employeeRepository.getEmployeeListByPage(page, pageSize);
+    public Page<Employee> getEmployeeListByPage(int page, int pageSize) {
+        return this.employeeRepository.findAll(PageRequest.of(page, pageSize));
     }
 
     public List<Employee> getEmployeeListByGender(String gender) {
-        return this.employeeRepository.getEmployeeListByGender(gender);
+        return this.employeeRepository.findByGender(gender);
     }
 
     public Employee addEmployee(Employee employee) {
-        return this.employeeRepository.addEmployee(employee);
+        return this.employeeRepository.save(employee);
     }
 
     public Employee updateEmployee(Integer id, Employee update) {
-        return this.employeeRepository.updateEmployee(id, update);
+        Employee employee = this.getEmployeeById(id);
+        employee.updateData(update);
+        return this.employeeRepository.save(employee);
     }
 
     public boolean deleteEmployeeById(Integer id) {
-        return this.employeeRepository.deleteEmployeeById(id);
+        Employee employee =this.getEmployeeById(id);
+        this.employeeRepository.delete(employee);
+        return true;
     }
 }

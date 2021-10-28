@@ -1,7 +1,10 @@
 package com.afs.restfulapi.Controller;
 
 import com.afs.restfulapi.Entity.Company;
+import com.afs.restfulapi.Exception.CompanyNotFoundException;
 import com.afs.restfulapi.Repository.CompanyRepository;
+import com.afs.restfulapi.Repository.NewCompanyRepository;
+import com.afs.restfulapi.Service.CompanyService;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
@@ -9,30 +12,35 @@ import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/Componies")
 public class CompanyController {
+    private final CompanyService companyService;
     private final CompanyRepository companyRepository;
 
-    public CompanyController(CompanyRepository companyRepository) {
+    public CompanyController(CompanyService companyService, CompanyRepository companyRepository) {
+        this.companyService = companyService;
         this.companyRepository = companyRepository;
     }
 
     @GetMapping
     public List<Company> getCompanyList() {
-        return new CompanyRepository().findAll();
+        return this.companyService.getCompanyList();
     }
 
     @GetMapping("/{id}")
-    public Company getCompanyListById(@PathVariable Integer id) {
-        return new CompanyRepository().findById(id);
+    public Company getCompanyById(@PathVariable Integer id) {
+        return this.companyService.getCompanyById(id)
+//                .orElseThrow(CompanyNotFoundException::new)
+                ;
     }
 
-    @GetMapping("/gender")
-    public List<Company> findByCompanyName(@RequestParam("CompanyName") String CompanyName) {
-        return new CompanyRepository().findByCompanyName(CompanyName);
-    }
+//    @GetMapping("/{id}")
+//    public List<Company> findByCompanyName(@RequestParam("CompanyName") String CompanyName) {
+//        return this.companyService.getCompanyByName(CompanyName);
+//    }
 
     @GetMapping(params = {"page", "size"})
     public PageImpl<Company> findPagingCompanies(@PageableDefault Pageable pageable) {
@@ -46,17 +54,18 @@ public class CompanyController {
 
     @PutMapping("{/id}")
     public Company editCompany(@PathVariable Integer id, @RequestBody Company updatedcompany) {
-        Company originCompany = this.companyRepository.findById(id);
+        Company originCompany = this.companyService.getCompanyById(id);
         if (originCompany.getCompanyName() != null) {
             originCompany.setCompanyName(updatedcompany.getCompanyName());
         }
-        return this.companyRepository.saveCompany(id, updatedcompany);
+        return this.companyService.updateCompany(id,updatedcompany);
     }
 
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteCompany(@PathVariable Integer id) {
-        this.companyRepository.deleteCompany(id);
+
+        this.companyService.deleteCompanyById(id);
     }
 
 

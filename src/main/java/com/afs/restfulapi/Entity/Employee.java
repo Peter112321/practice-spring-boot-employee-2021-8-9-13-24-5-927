@@ -82,6 +82,7 @@ public class Employee {
         this.salary = employee.salary;
     }
 
+    //todo find out what's happening in this method
     @Override
     public boolean equals(Object o) {
         if (this == o) {

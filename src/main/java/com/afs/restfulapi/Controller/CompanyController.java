@@ -24,14 +24,12 @@ public class CompanyController {
 
     @GetMapping("/{id}")
     public Company getCompanyById(@PathVariable Integer id) {
-        return this.companyService.getCompanyById(id)
-//                .orElseThrow(CompanyNotFoundException::new)
-                ;
+        return this.companyService.getCompanyById(id);
     }
 
-//    @GetMapping("/{id}")
-//    public List<Company> findByCompanyName(@RequestParam("CompanyName") String CompanyName) {
-//        return this.companyService.getCompanyByName(CompanyName);
+//    @GetMapping("/{id}/employees")
+//    public List<Employee> findEmployeeListByCompanyId(@RequestParam("id") String CompanyName) {
+//        return this.companyService.(id);
 //    }
 
     @RequestMapping(params = {"page", "pageSize"}, method = RequestMethod.GET)

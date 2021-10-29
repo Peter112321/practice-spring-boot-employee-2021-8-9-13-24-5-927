@@ -4,6 +4,8 @@ public class ErrorResponse {
     private Integer httpCode;
     private String msg;
 
+
+    //todo
     public Integer getHttpCode() {
         return httpCode;
     }

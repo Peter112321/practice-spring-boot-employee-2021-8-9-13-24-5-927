@@ -84,6 +84,7 @@ public class Employee {
 
     //todo find out what's happening in this method
     @Override
+
     public boolean equals(Object o) {
         if (this == o) {
             return true;

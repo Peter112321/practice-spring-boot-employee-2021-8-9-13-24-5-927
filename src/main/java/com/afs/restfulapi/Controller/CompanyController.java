@@ -1,7 +1,9 @@
 package com.afs.restfulapi.Controller;
 
 import com.afs.restfulapi.Entity.Company;
+import com.afs.restfulapi.Entity.Employee;
 import com.afs.restfulapi.Service.CompanyService;
+import com.afs.restfulapi.mapper.CompanyMapper;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,15 +13,17 @@ import java.util.List;
 @RequestMapping("/Companies")
 public class CompanyController {
     private final CompanyService companyService;
+    private final CompanyMapper companyMapper;
 
-    public CompanyController(CompanyService companyService) {
+    public CompanyController(CompanyService companyService, CompanyMapper companyMapper) {
         this.companyService = companyService;
 
+        this.companyMapper = companyMapper;
     }
 
     @GetMapping
     public List<Company> getCompanyList() {
-        return this.companyService.getCompanyList();
+        return this.companyService.getCompanyList().stream().map(company -> companyMapper.to);
     }
 
     @GetMapping("/{id}")
@@ -27,10 +31,10 @@ public class CompanyController {
         return this.companyService.getCompanyById(id);
     }
 
-//    @GetMapping("/{id}/employees")
-//    public List<Employee> findEmployeeListByCompanyId(@RequestParam("id") String CompanyName) {
-//        return this.companyService.(id);
-//    }
+    @GetMapping("/{id}/employees")
+    public List<Employee> findEmployeeById(@RequestParam("id") int id) {
+        return this.companyService.getEmployeeListInCompanyById(id);
+    }
 
     @RequestMapping(params = {"page", "pageSize"}, method = RequestMethod.GET)
     public List<Company> getCompanyListByPage(@RequestParam(value = "page", defaultValue = "0") int page,

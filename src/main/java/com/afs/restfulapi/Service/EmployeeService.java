@@ -30,7 +30,7 @@ public class EmployeeService {
     }
 
     public List<Employee> getEmployeeListByGender(String gender) {
-        return this.employeeRepository.findByGender(gender);
+        return this.employeeRepository.findAllByGender(gender);
     }
 
     public Employee addEmployee(Employee employee) {

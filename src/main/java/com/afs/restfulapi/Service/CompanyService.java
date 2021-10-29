@@ -8,10 +8,11 @@ import com.afs.restfulapi.Repository.EmployeeRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Repository
+@Service
 public class CompanyService {
     private final CompanyRepository companyRepository;
     private final EmployeeRepository employeeRepository;

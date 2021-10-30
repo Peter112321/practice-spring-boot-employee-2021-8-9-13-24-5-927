@@ -146,6 +146,7 @@ public class EmployeeControllerTest {
                 .andExpect(content().json(expected));
     }
 
+    //5
     @Test
     void should_get_employee_when_add_employee_given_employee_info() throws Exception {
         //given
@@ -154,7 +155,8 @@ public class EmployeeControllerTest {
                         "        \"name\": \"Benny\",\n" +
                         "        \"age\": 19,\n" +
                         "        \"gender\": \"male\",\n" +
-                        "        \"salary\": 20000\n" +
+                        "        \"salary\": 20000,\n" +
+                        "        \"companyId\": 1\n" +
                         "    }\n";
 
         String expected =
@@ -162,8 +164,7 @@ public class EmployeeControllerTest {
                         "        \"id\": 1,\n" +
                         "        \"name\": \"Benny\",\n" +
                         "        \"age\": 19,\n" +
-                        "        \"gender\": \"male\",\n" +
-                        "        \"salary\": 20000\n" +
+                        "        \"gender\": \"male\"\n" +
                         "    }\n";
 
         //when

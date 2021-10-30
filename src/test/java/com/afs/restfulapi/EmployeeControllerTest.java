@@ -79,8 +79,7 @@ public class EmployeeControllerTest {
                         "    \"id\": 1,\n" +
                         "    \"name\": \"Benny\",\n" +
                         "    \"age\": 19,\n" +
-                        "    \"gender\": \"male\",\n" +
-                        "    \"salary\": 20000\n" +
+                        "    \"gender\": \"male\"\n" +
                         "}\n";
 
         //when

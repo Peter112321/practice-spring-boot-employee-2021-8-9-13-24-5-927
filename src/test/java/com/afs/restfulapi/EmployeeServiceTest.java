@@ -81,7 +81,7 @@ public class EmployeeServiceTest {
         Page<Employee> actual = employeeService.getEmployeeListByPage(1, 1);
 
         //then
-        assertEquals(expected, actual);
+        assertEquals(new PageImpl(expected), actual);
     }
 
     //4

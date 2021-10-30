@@ -75,24 +75,18 @@ public class Employee {
         this.salary = salary;
     }
 
-    public void updateData(Employee employee) {
-        this.name = employee.name;
-        this.age = employee.age;
-        this.gender = employee.gender;
-        this.salary = employee.salary;
-    }
 
     //todo find out what's happening in this method
-    @Override
+//    @Override
 
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o instanceof Employee) {
-            Employee employee = (Employee) o;
-            return this.id.equals(((Employee) o).id);
-        }
-        return false;
-    }
+//    public boolean equals(Object o) {
+//        if (this == o) {
+//            return true;
+//        }
+//        if (o instanceof Employee) {
+//            Employee employee = (Employee) o;
+//            return this.id.equals(((Employee) o).id);
+//        }
+//        return false;
+//    }
 }

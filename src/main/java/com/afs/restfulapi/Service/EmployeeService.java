@@ -39,9 +39,23 @@ public class EmployeeService {
 
     public Employee updateEmployee(Integer id, Employee update) {
         Employee employee = this.getEmployeeById(id);
-        employee.updateData(update);
-        return this.employeeRepository.save(employee);
-    }
+        if(update.getName()!=null){
+            employee.setName(update.getName());
+        }
+        if(update.getAge()!=null){
+            employee.setAge(update.getAge());
+        }
+        if(update.getGender()!=null){
+            employee.setGender(update.getGender());
+        }
+        if(update.getSalary()!=null){
+            employee.setSalary(update.getSalary());
+        }
+        if(update.getCompanyId()!=null){
+            employee.setCompanyId(update.getCompanyId());
+        }
+        return this.employeeRepository.save(update);
+}
 
     public boolean deleteEmployeeById(Integer id) {
         Employee employee =this.getEmployeeById(id);

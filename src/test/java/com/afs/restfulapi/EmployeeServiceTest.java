@@ -20,7 +20,7 @@ import java.util.stream.Collectors;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class EmployeeServiceTest {
@@ -29,6 +29,8 @@ public class EmployeeServiceTest {
     EmployeeRepository employeeRepository;
     @InjectMocks
     EmployeeService employeeService;
+
+    //1
     @Test
     void should_return_all_employee_when_get_employee_list_given_3_employee() {
         List<Employee> employeeList = Arrays.asList(
@@ -45,6 +47,8 @@ public class EmployeeServiceTest {
         assertEquals(employeeList, actual);
     }
 
+
+    //2
     @Test
     void should_return_correct_employee_when_get_by_id_given_id() {
         List<Employee> employeeList = Arrays.asList(
@@ -61,6 +65,7 @@ public class EmployeeServiceTest {
         assertEquals(employeeList.get(0), actual);
     }
 
+    //3
     @Test
     void should_return_correct_employees_page_when_get_page_given_page_and_page_size() {
         List<Employee> employeeList = Arrays.asList(
@@ -79,6 +84,7 @@ public class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
+    //4
     @Test
     void should_return_employees_list_when_get_by_gender_given_gender() {
         List<Employee> employeeList = Arrays.asList(
@@ -100,6 +106,7 @@ public class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
+    //5
     @Test
     void should_return_employee_when_add_employee_given_employee() {
         List<Employee> employeeList = Arrays.asList(
@@ -120,6 +127,7 @@ public class EmployeeServiceTest {
         assertEquals(expected, actual);
     }
 
+    //6
     @Test
     void should_return_updated_employee_when_update_employee_by_id_given_id_and_employee_info() {
         Employee employee = new Employee("Benny", 19, "male", 20000);
@@ -141,12 +149,18 @@ public class EmployeeServiceTest {
         assertEquals(123, actual.getSalary());
     }
 
+    //7
     @Test
     void should_return_delete_message_when_delete_employee_given_id() {
+        //alternative method
+//        //given
+//        doNothing().when(employeeRepository).deleteById(1);
+//        //when
+//        employeeService.deleteEmployeeById(1);
+//        //then
+//        verify(employeeRepository, times(1)).deleteById(1);
         Employee employee = new Employee("Benny", 19, "male", 20000);
         employeeRepository.save(employee);
-
-
 
         //when
         boolean actual = employeeService.deleteEmployeeById(1);

@@ -58,8 +58,7 @@ public class EmployeeService {
 }
 
     public boolean deleteEmployeeById(Integer id) {
-        Employee employee =this.getEmployeeById(id);
-        this.employeeRepository.delete(employee);
+        this.employeeRepository.deleteById(id);
         return true;
     }
 }

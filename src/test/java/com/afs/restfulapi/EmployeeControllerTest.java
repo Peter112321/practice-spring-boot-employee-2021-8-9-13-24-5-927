@@ -31,6 +31,7 @@ public class EmployeeControllerTest {
         employeeRepository.deleteAll();
     }
 
+    //1
     @Test
     void should_return_all_employee_when_get_employee_list_given_2_employee() throws Exception {
         //given
@@ -45,15 +46,13 @@ public class EmployeeControllerTest {
                 "        \"id\": 1,\n" +
                 "        \"name\": \"Benny\",\n" +
                 "        \"age\": 19,\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"salary\": 20000\n" +
+                "        \"gender\": \"male\"\n" +
                 "    },\n" +
                 "    {\n" +
                 "        \"id\": 2,\n" +
                 "        \"name\": \"Tommy\",\n" +
                 "        \"age\": 22,\n" +
-                "        \"gender\": \"male\",\n" +
-                "        \"salary\": 20000\n" +
+                "        \"gender\": \"male\"\n" +
                 "    }\n" +
                 "]";
 

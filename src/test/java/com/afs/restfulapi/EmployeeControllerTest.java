@@ -23,10 +23,8 @@ public class EmployeeControllerTest {
     @Autowired
     private MockMvc mockMvc;
 
-
     @Autowired
     private EmployeeRepository employeeRepository;
-
 
     @BeforeEach
     void Init() {
@@ -171,8 +169,8 @@ public class EmployeeControllerTest {
         //when
         ResultActions resultActions = mockMvc
                 .perform(post("/employees")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(employeeInfo));
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(employeeInfo));
 
         //then
         resultActions
@@ -206,8 +204,8 @@ public class EmployeeControllerTest {
         //when
         ResultActions resultActions = mockMvc
                 .perform(put("/employees/1")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(updateInfo));
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(updateInfo));
 
         //then
         resultActions

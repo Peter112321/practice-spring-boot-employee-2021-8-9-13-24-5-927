@@ -88,7 +88,7 @@ public class EmployeeServiceTest {
                 .stream()
                 .filter(employee -> employee.getGender().equals("male"))
                 .collect(Collectors.toList());
-        when(employeeRepository.findByGender("male"))
+        when(employeeRepository.findAllByGender("male"))
                 .thenReturn(expected);
 
         //when

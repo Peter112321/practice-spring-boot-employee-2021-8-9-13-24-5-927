@@ -8,8 +8,6 @@ import com.afs.restfulapi.Exception.EmployeeNotFoundException;
 import com.afs.restfulapi.Service.EmployeeService;
 import com.afs.restfulapi.mapper.EmployeeMapper;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.web.PageableDefault;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -30,25 +28,23 @@ public class EmployeeController {
 
     @GetMapping
     public List<EmployeeResponse> getEmployeeList() {
-
         return this.employeeService.getEmployeeList()
                 .stream()
                 .map(employee -> employeeMapper.toResponse(employee))
                 .collect(Collectors.toList());
     }
-//to res
+
+    //to res
     @GetMapping("/{id}")
     public EmployeeResponse getEmployeeById(@PathVariable("id") Integer id) {
-
         return employeeMapper.toResponse(this.employeeService.getEmployeeById(id));
     }
 
-//    @RequestMapping(params = {"page", "pageSize"}, method = RequestMethod.GET)
-//    public Page<Employee> getEmployeeListByPage(@RequestParam(value = "page", defaultValue = "0") int page,
-//                                                @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
-//        return this.employeeService.getEmployeeListByPage(page, pageSize).map(employee -> employeeMapper.toResponse(Employee));
-//    }
-
+    @RequestMapping(params = {"page", "pageSize"}, method = RequestMethod.GET)
+    public Page<EmployeeResponse> getEmployeeListByPage(@RequestParam(value = "page", defaultValue = "0") int page,
+                                                        @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
+        return this.employeeService.getEmployeeListByPage(page, pageSize).map(employee -> employeeMapper.toResponse(employee));
+    }
 
 
     @RequestMapping(params = {"gender"}, method = RequestMethod.GET)

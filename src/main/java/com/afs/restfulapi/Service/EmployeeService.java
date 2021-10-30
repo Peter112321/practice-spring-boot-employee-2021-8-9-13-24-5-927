@@ -54,7 +54,7 @@ public class EmployeeService {
         if(update.getCompanyId()!=null){
             employee.setCompanyId(update.getCompanyId());
         }
-        return this.employeeRepository.save(update);
+        return this.employeeRepository.save(employee);
 }
 
     public boolean deleteEmployeeById(Integer id) {

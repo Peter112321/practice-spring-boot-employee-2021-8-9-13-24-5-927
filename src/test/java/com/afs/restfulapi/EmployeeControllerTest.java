@@ -183,6 +183,7 @@ public class EmployeeControllerTest {
     void should_get_employee_when_update_employee_given_employee_info() throws Exception {
         //given
         Employee employee = new Employee("Benny", 25, "male", 10000);
+
         employeeRepository.save(employee);
 
         String updateInfo =
@@ -198,8 +199,7 @@ public class EmployeeControllerTest {
                         "        \"id\": 1,\n" +
                         "        \"name\": \"Benny\",\n" +
                         "        \"age\": 19,\n" +
-                        "        \"gender\": \"male\",\n" +
-                        "        \"salary\": 20000\n" +
+                        "        \"gender\": \"male\"\n" +
                         "    }\n";
 
         //when

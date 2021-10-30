@@ -65,6 +65,7 @@ public class EmployeeControllerTest {
                 .andExpect(content().json(expected));
     }
 
+    //2
     @Test
     void should_return_correct_employee_when_get_by_id_given_id() throws Exception {
         //given
@@ -91,6 +92,7 @@ public class EmployeeControllerTest {
                 .andExpect(content().json(expected));
     }
 
+    //3
     @Test
     void should_return_correct_employees_page_when_get_page_given_page_and_page_size() throws Exception {
         //given
@@ -103,7 +105,7 @@ public class EmployeeControllerTest {
         employeeRepository.save(employee2);
         employeeRepository.save(employee3);
 
-        String expected = "{\"content\":[{\"id\":2,\"name\":\"Tommy\",\"age\":22,\"gender\":\"male\",\"salary\":20000}],\"pageable\":{\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"pageNumber\":1,\"pageSize\":1,\"offset\":1,\"unpaged\":false,\"paged\":true},\"last\":false,\"totalPages\":3,\"totalElements\":3,\"numberOfElements\":1,\"first\":false,\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"size\":1,\"number\":1,\"empty\":false}";
+        String expected = "{\"content\":[{\"id\":2,\"name\":\"Tommy\",\"age\":22,\"gender\":\"male\"}],\"pageable\":{\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"pageNumber\":1,\"pageSize\":1,\"offset\":1,\"unpaged\":false,\"paged\":true},\"last\":false,\"totalPages\":3,\"totalElements\":3,\"numberOfElements\":1,\"first\":false,\"sort\":{\"sorted\":false,\"unsorted\":true,\"empty\":true},\"size\":1,\"number\":1,\"empty\":false}";
 
         //when
         ResultActions resultActions = mockMvc.perform(get("/employees?page=1&pageSize=1"));
@@ -114,6 +116,7 @@ public class EmployeeControllerTest {
                 .andExpect(content().json(expected));
     }
 
+    //4
     @Test
     void should_return_employee_list_when_get_page_by_gender_given_gender() throws Exception {
         //given
@@ -130,8 +133,7 @@ public class EmployeeControllerTest {
                 "        \"id\": 3,\n" +
                 "        \"name\": \"Mary\",\n" +
                 "        \"age\": 22,\n" +
-                "        \"gender\": \"female\",\n" +
-                "        \"salary\": 100000\n" +
+                "        \"gender\": \"female\"\n" +
                 "    }\n" +
                 "]";
 

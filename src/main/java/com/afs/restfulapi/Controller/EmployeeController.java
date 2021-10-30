@@ -56,13 +56,13 @@ public class EmployeeController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping
-    public Employee addEmployee(@RequestBody EmployeeRequest employeeRequest) {
-        return this.employeeService.addEmployee(employeeMapper.toEntity(employeeRequest));
+    public EmployeeResponse addEmployee(@RequestBody EmployeeRequest employeeRequest) {
+        return employeeMapper.toResponse(this.employeeService.addEmployee(employeeMapper.toEntity(employeeRequest)));
     }
 
     @PutMapping("/{id}")
-    public Employee updateEmployeeById(@PathVariable("id") Integer id, @RequestBody EmployeeRequest employeeRequest) {
-        return this.employeeService.updateEmployee(id, employeeMapper.toEntity(employeeRequest));
+    public EmployeeResponse updateEmployeeById(@PathVariable("id") Integer id, @RequestBody EmployeeRequest employeeRequest) {
+        return employeeMapper.toResponse(this.employeeService.updateEmployee(id, employeeMapper.toEntity(employeeRequest)));
     }
 
     @DeleteMapping("/{id}")

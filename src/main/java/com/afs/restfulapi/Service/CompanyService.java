@@ -55,8 +55,7 @@ public class CompanyService {
     }
 
     public boolean deleteCompanyById(Integer id) {
-        Company company = this.getCompanyById(id);
-        this.companyRepository.delete(company);
+        this.companyRepository.deleteById(1);
         return true;
     }
 

@@ -18,8 +18,9 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 @ExtendWith(SpringExtension.class)
 public class CompanyServiceTest {
@@ -40,9 +41,9 @@ public class CompanyServiceTest {
         when(companyRepository.findAll()).thenReturn(companies);
 
         //when
-        List<Company> actual= companyService.getCompanyList();
+        List<Company> actual = companyService.getCompanyList();
         //then
-        assertEquals(actual,companies);
+        assertEquals(actual, companies);
     }
 
     //2
@@ -57,9 +58,9 @@ public class CompanyServiceTest {
         when(companyRepository.findById(1)).thenReturn(Optional.of(companies.get(0)));
 
         //when
-       Company actual= companyService.getCompanyById(1);
+        Company actual = companyService.getCompanyById(1);
         //then
-        assertEquals(actual,companies.get(0));
+        assertEquals(actual, companies.get(0));
     }
     //3
 
@@ -72,12 +73,58 @@ public class CompanyServiceTest {
                 new Company("b"),
                 new Company("c")
         );
-        List<Company> expected=companies.stream().skip(1).limit(1).collect(Collectors.toList());
+        List<Company> expected = companies.stream().skip(1).limit(1).collect(Collectors.toList());
         when(companyRepository.findAll(any(Pageable.class)))
                 .thenReturn(new PageImpl(expected));
         //when
-        Page<Company> actual= companyService.getCompanyListByPage(1,1);
+        Page<Company> actual = companyService.getCompanyListByPage(1, 1);
         //then
-        assertEquals(actual,new PageImpl(expected));
+        assertEquals(actual, new PageImpl(expected));
+    }
+
+    //5
+    @Test
+    void should_return_company_when_add_Company_given_companyInfo() {
+        //given
+        List<Company> companies = Arrays.asList(
+                new Company("a"),
+                new Company("b"),
+                new Company("c")
+        );
+        Company newCompany = new Company("d");
+        when(companyRepository.save(newCompany))
+                .thenReturn(newCompany);
+        //when
+        Company actual = companyService.addCompany(newCompany);
+        //then
+        assertEquals(actual, newCompany);
+    }
+
+    //6
+
+    @Test
+    void should_return_updated_company_when_put_Company_given_companyInfo() {
+        //given
+        Company a = new Company("a");
+        when(companyRepository.findById(1)).thenReturn(Optional.of(a));
+        Company updated = new Company("d");
+        when(companyRepository.save(any(Company.class)))
+                .thenReturn(updated);
+        //when
+        Company actual = companyService.updateCompany(1, updated);
+        //then
+        assertEquals(actual, updated);
+    }
+
+    //7
+    @Test
+    void should_return_True_when_delete_Company_given_company_id() {
+
+        //given
+        doNothing().when(companyRepository).deleteById(1);
+        //when
+        companyService.deleteCompanyById(1);
+        //then
+        verify(companyRepository, times(1)).deleteById(1);
     }
 }

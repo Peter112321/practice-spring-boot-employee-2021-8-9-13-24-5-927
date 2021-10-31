@@ -7,12 +7,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.http.MediaType;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -96,22 +96,24 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$[1].name").value(b.getCompanyName()));
     }
 
-//    //4
+    //4
 //    @Test
 //    void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
 //        //given
-//        String NewCompany = "{\n" +
-//                "   \"name\": \"NewCompany\"\n" +
+//        Company a = new Company("a");
+//        companyRepository.save(a);
+//        String update = "{\n" +
+//                "   \"name\": \"NewName\"\n" +
 //                "}\n";
 //
 //        //when
-//        ResultActions resultActions = mockMvc.perform(post("/companies")
-//                .contentType(MediaType.APPLICATION_JSON)
-//                .content(NewCompany));
+//        ResultActions resultActions = mockMvc.perform(put("/companies/1")
+//                .content(update)
+//                .contentType(MediaType.APPLICATION_JSON));
 //        //when
 //        resultActions.andExpect(status().isOk())
-//                .andExpect(jsonPath("$[0].id").value(1))
-//                .andExpect(jsonPath("$[0].name").value("NewCompany"));
+//                .andExpect(jsonPath("$.id").value(a.getCompanyId()))
+//                .andExpect(jsonPath("$.name").value("NewName"));
 //    }
 
     //5

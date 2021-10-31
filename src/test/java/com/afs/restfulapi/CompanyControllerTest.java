@@ -97,27 +97,29 @@ public class CompanyControllerTest {
     }
 
     //4
-//    @Test
-//    void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
-//        //given
-//        Company a = new Company("a");
-//        companyRepository.save(a);
-//        String update = "{\n" +
-//                "   \"name\": \"NewName\"\n" +
-//                "}\n";
-//
-//        //when
-//        ResultActions resultActions = mockMvc.perform(put("/companies/1")
-//                .content(update)
-//                .contentType(MediaType.APPLICATION_JSON));
-//        //when
-//        resultActions.andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(a.getCompanyId()))
-//                .andExpect(jsonPath("$.name").value("NewName"));
-//    }
+    @Test
+    void Should_update_company_when_update_company_given_company_info() throws Exception {
+        //given
+        Company a = new Company("a");
+        companyRepository.save(a);
+        String update = "{\n" +
+                "   \"name\": \"NewName\"\n" +
+                "}\n";
+
+        //when
+        ResultActions resultActions = mockMvc.perform(put("/companies/1")
+                .content(update)
+                .contentType(MediaType.APPLICATION_JSON));
+        //when
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(a.getCompanyId()))
+                .andExpect(jsonPath("$.name").value("NewName"));
+    }
 
     //5
 
+//6
+//void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
 
     @Test
     void should_get_deleted_success_message_when_delete_company_given_company_id() throws Exception {

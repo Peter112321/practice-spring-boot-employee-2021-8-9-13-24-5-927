@@ -11,6 +11,7 @@ import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -30,6 +31,7 @@ public class CompanyControllerTest {
         companyRepository.deleteAll();
     }
 
+    //1
     @Test
     void Should_return_all_companies_when_get_companies_given_two_companies() throws Exception {
         //given
@@ -51,6 +53,7 @@ public class CompanyControllerTest {
 
     }
 
+    //2
     @Test
     void Should_return_Specific_companies_when_get_companies_given_company_id() throws Exception {
         //given
@@ -70,6 +73,8 @@ public class CompanyControllerTest {
 
     }
 
+
+    //3
     @Test
     void Should_return_company_page_when_get_companies_given_page_size_and_page_number() throws Exception {
         //given
@@ -89,7 +94,39 @@ public class CompanyControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$[1].id").value(b.getCompanyId()))
                 .andExpect(jsonPath("$[1].name").value(b.getCompanyName()));
+    }
+
+//    //4
+//    @Test
+//    void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
+//        //given
+//        String NewCompany = "{\n" +
+//                "   \"name\": \"NewCompany\"\n" +
+//                "}\n";
+//
+//        //when
+//        ResultActions resultActions = mockMvc.perform(post("/companies")
+//                .contentType(MediaType.APPLICATION_JSON)
+//                .content(NewCompany));
+//        //when
+//        resultActions.andExpect(status().isOk())
+//                .andExpect(jsonPath("$[0].id").value(1))
+//                .andExpect(jsonPath("$[0].name").value("NewCompany"));
+//    }
+
+    //5
 
 
+    @Test
+    void should_get_deleted_success_message_when_delete_company_given_company_id() throws Exception {
+        Company a = new Company("a");
+        companyRepository.save(a);
+
+        ResultActions resultActions = mockMvc.perform(delete("/companies/1"));
+
+        resultActions
+                .andExpect(status().isNoContent())
+                .andExpect(jsonPath("$[0].id").doesNotExist())
+                .andExpect(jsonPath("$[0].name").doesNotExist());
     }
 }

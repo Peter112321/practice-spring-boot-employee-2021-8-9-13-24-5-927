@@ -3,6 +3,7 @@ package com.afs.restfulapi.Controller;
 import com.afs.restfulapi.DTO.CompanyRequest;
 import com.afs.restfulapi.DTO.CompanyResponse;
 import com.afs.restfulapi.DTO.EmployeeResponse;
+import com.afs.restfulapi.Entity.Company;
 import com.afs.restfulapi.Service.CompanyService;
 import com.afs.restfulapi.mapper.CompanyMapper;
 import com.afs.restfulapi.mapper.EmployeeMapper;
@@ -55,8 +56,8 @@ public class CompanyController {
     }
 
     @PostMapping
-    public CompanyResponse createCompany(@RequestBody CompanyRequest companyRequest) {
-        return companyMapper.toResponse(this.companyService.addCompany(companyMapper.toEntity(companyRequest)));
+    public Company createCompany(@RequestBody CompanyRequest companyRequest) {
+        return companyService.addCompany(companyMapper.toEntity(companyRequest));
 
     }
 

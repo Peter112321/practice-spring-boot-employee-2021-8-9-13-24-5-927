@@ -75,6 +75,26 @@ public class CompanyControllerTest {
 
 
     //3
+//    @Test
+//    void Should_return_employees_when_get_companies_given_company_id() throws Exception {
+//        //given
+//        Company a = new Company("a");
+//        Company b = new Company("b");
+//        companyRepository.save(a);
+//        companyRepository.save(b);
+//
+//        //when
+//        ResultActions resultActions = mockMvc.perform(get("/companies"));
+//
+//        //then
+//        resultActions
+//                .andExpect(status().isOk())
+//                .andExpect(jsonPath("$.id").value(b.getCompanyId()))
+//                .andExpect(jsonPath("$.name").value(b.getCompanyName()));
+//
+//    }
+
+    //4
     @Test
     void Should_return_company_page_when_get_companies_given_page_size_and_page_number() throws Exception {
         //given
@@ -96,13 +116,14 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$[1].name").value(b.getCompanyName()));
     }
 
-    //4
+    //5
     @Test
     void Should_update_company_when_update_company_given_company_info() throws Exception {
         //given
         Company a = new Company("a");
         companyRepository.save(a);
-        String update = "{\n" +
+        String update =
+                "{\n" +
                 "   \"name\": \"NewName\"\n" +
                 "}\n";
 
@@ -116,9 +137,9 @@ public class CompanyControllerTest {
                 .andExpect(jsonPath("$.name").value("NewName"));
     }
 
-    //5
+    //6
 
-//6
+//7
 //void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
 
     @Test

@@ -1,7 +1,9 @@
 package com.afs.restfulapi;
 
 import com.afs.restfulapi.Entity.Company;
+import com.afs.restfulapi.Entity.Employee;
 import com.afs.restfulapi.Repository.CompanyRepository;
+import com.afs.restfulapi.Repository.EmployeeRepository;
 import com.afs.restfulapi.Service.CompanyService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -26,8 +28,12 @@ import static org.mockito.Mockito.*;
 public class CompanyServiceTest {
     @Mock
     CompanyRepository companyRepository;
+    @Mock
+    EmployeeRepository employeeRepository;
     @InjectMocks
     CompanyService companyService;
+
+
 
     //1
     @Test
@@ -63,6 +69,24 @@ public class CompanyServiceTest {
         assertEquals(actual, companies.get(0));
     }
     //3
+
+    @Test
+    void should_return_Employee_list_when_get_Company_given_CompanyId() {
+        //given
+
+        List<Employee> employeeList = Arrays.asList(
+                new Employee("Benny", 19, "male", 20000,1),
+                new Employee("Tommy", 22, "male", 20000,1),
+                new Employee("Mary", 22, "female", 100000,2)
+        );
+
+        when(employeeRepository.findAllByCompanyId(1)).thenReturn(employeeList);
+
+        //when
+        List<Employee> actual = companyService.getEmployeeListInCompanyById(1);
+        //then
+        assertEquals(actual, employeeList);
+    }
 
     //4
     @Test

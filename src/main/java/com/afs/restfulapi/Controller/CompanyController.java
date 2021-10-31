@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("/Companies")
+@RequestMapping("/companies")
 public class CompanyController {
     private final CompanyService companyService;
     private final CompanyMapper companyMapper;

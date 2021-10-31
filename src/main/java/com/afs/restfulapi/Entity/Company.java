@@ -15,11 +15,9 @@ public class Company {
     @OneToMany(mappedBy = "companyId")
     private List<Employee> companyEmployee;
 
-
-    public Company(Integer companyId, String companyName) {
-        this.companyId = companyId;
+    public Company( String companyName) {
+        this.companyId=null;
         this.companyName = companyName;
-
     }
 
     public Company() {

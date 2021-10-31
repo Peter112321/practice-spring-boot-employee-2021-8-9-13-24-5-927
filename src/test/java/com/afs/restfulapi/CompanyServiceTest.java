@@ -40,5 +40,20 @@ public class CompanyServiceTest {
         assertEquals(actual,companies);
     }
 
-    
+    //2
+    @Test
+    void should_return_Company_when_get_Company__CompanyId() {
+        //given
+        List<Company> companies = Arrays.asList(
+                new Company("a"),
+                new Company("b"),
+                new Company("c")
+        );
+        when(companyRepository.findById(1)).thenReturn(Optional.of(companies.get(0)));
+
+        //when
+       Company actual= companyService.getCompanyById(1);
+        //then
+        assertEquals(actual,companies.get(0));
+    }
 }

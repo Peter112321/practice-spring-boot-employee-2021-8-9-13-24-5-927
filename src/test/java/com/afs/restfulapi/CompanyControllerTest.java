@@ -46,11 +46,10 @@ public class CompanyControllerTest {
         //then
         resultActions
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$[1].id").value(a.getCompanyId()))
-                .andExpect(jsonPath("$[1].name").value(a.getCompanyName()))
-                .andExpect(jsonPath("$[2].id").value(a.getCompanyId()))
-                .andExpect(jsonPath("$[2].name").value(b.getCompanyName()))
-                .andExpect(jsonPath("$[2]").doesNotExist());
+                .andExpect(jsonPath("$[0].id").value(a.getCompanyId()))
+                .andExpect(jsonPath("$[0].name").value(a.getCompanyName()))
+                .andExpect(jsonPath("$[1].id").value(b.getCompanyId()))
+                .andExpect(jsonPath("$[1].name").value(b.getCompanyName()));
 
     }
 

@@ -1,7 +1,9 @@
 package com.afs.restfulapi;
 
 import com.afs.restfulapi.Entity.Company;
+import com.afs.restfulapi.Entity.Employee;
 import com.afs.restfulapi.Repository.CompanyRepository;
+import com.afs.restfulapi.Repository.EmployeeRepository;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,8 @@ public class CompanyControllerTest {
     private MockMvc mockMvc;
     @Autowired
     private CompanyRepository companyRepository;
+    @Autowired
+    private EmployeeRepository employeeRepository;
 
     @BeforeEach
     void SetUp() {
@@ -75,24 +79,28 @@ public class CompanyControllerTest {
 
 
     //3
-//    @Test
-//    void Should_return_employees_when_get_companies_given_company_id() throws Exception {
-//        //given
-//        Company a = new Company("a");
-//        Company b = new Company("b");
-//        companyRepository.save(a);
-//        companyRepository.save(b);
-//
-//        //when
-//        ResultActions resultActions = mockMvc.perform(get("/companies"));
-//
-//        //then
-//        resultActions
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.id").value(b.getCompanyId()))
-//                .andExpect(jsonPath("$.name").value(b.getCompanyName()));
-//
-//    }
+    @Test
+    void Should_return_employees_when_get_companies_given_company_id() throws Exception {
+        //given
+        Company a = new Company("a");
+        Company b = new Company("b");
+        companyRepository.save(a);
+        companyRepository.save(b);
+
+        Employee employee1 = new Employee("Benny", 19, "male", 20000, a.getCompanyId());
+        Employee employee2 = new Employee("Tommy", 22, "male", 20000, b.getCompanyId());
+        employeeRepository.save(employee1);
+        employeeRepository.save(employee2);
+//when
+        ResultActions resultActions = mockMvc.perform(get("/companies/1/employees"));
+
+        //then
+        resultActions
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$[0].id").value(employee1.getId()))
+                .andExpect(jsonPath("$[0].name").value(employee1.getName()));
+
+    }
 
     //4
     @Test
@@ -124,8 +132,8 @@ public class CompanyControllerTest {
         companyRepository.save(a);
         String update =
                 "{\n" +
-                "   \"name\": \"NewName\"\n" +
-                "}\n";
+                        "   \"name\": \"NewName\"\n" +
+                        "}\n";
 
         //when
         ResultActions resultActions = mockMvc.perform(put("/companies/1")
@@ -139,7 +147,7 @@ public class CompanyControllerTest {
 
     //6
     @Test
-void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
+    void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
         //given
 
         String add =

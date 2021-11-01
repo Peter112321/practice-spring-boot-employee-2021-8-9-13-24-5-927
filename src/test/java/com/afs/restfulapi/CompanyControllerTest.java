@@ -138,9 +138,26 @@ public class CompanyControllerTest {
     }
 
     //6
+    @Test
+void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
+        //given
+
+        String add =
+                "{\n" +
+                        "   \"name\": \"NewName\"\n" +
+                        "}\n";
+
+        //when
+        ResultActions resultActions = mockMvc.perform(post("/companies")
+                .content(add)
+                .contentType(MediaType.APPLICATION_JSON));
+        //when
+        resultActions.andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").exists())
+                .andExpect(jsonPath("$.name").value("NewName"));
+    }
 
 //7
-//void Should_add_new_companies_when_add_companies_given_companies_info() throws Exception {
 
     @Test
     void should_get_deleted_success_message_when_delete_company_given_company_id() throws Exception {

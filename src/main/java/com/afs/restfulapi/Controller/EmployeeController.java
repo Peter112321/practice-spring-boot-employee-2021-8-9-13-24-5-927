@@ -1,6 +1,5 @@
 package com.afs.restfulapi.Controller;
 
-
 import com.afs.restfulapi.DTO.EmployeeRequest;
 import com.afs.restfulapi.DTO.EmployeeResponse;
 import com.afs.restfulapi.Entity.Employee;
@@ -11,7 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +32,6 @@ public class EmployeeController {
                 .collect(Collectors.toList());
     }
 
-    //to res
     @GetMapping("/{id}")
     public EmployeeResponse getEmployeeById(@PathVariable("id") Integer id) {
         return employeeMapper.toResponse(this.employeeService.getEmployeeById(id));
@@ -43,13 +40,13 @@ public class EmployeeController {
     @RequestMapping(params = {"page", "pageSize"}, method = RequestMethod.GET)
     public Page<EmployeeResponse> getEmployeeListByPage(@RequestParam(value = "page", defaultValue = "0") int page,
                                                         @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
-        return this.employeeService.getEmployeeListByPage(page, pageSize).map(employee -> employeeMapper.toResponse(employee));
+        return employeeService.getEmployeeListByPage(page, pageSize).map(employee -> employeeMapper.toResponse(employee));
     }
 
 
     @RequestMapping(params = {"gender"}, method = RequestMethod.GET)
     public List<EmployeeResponse> getEmployeeListByGender(@RequestParam(value = "gender", defaultValue = "male") String gender) {
-        return this.employeeService.getEmployeeListByGender(gender).stream()
+        return employeeService.getEmployeeListByGender(gender).stream()
                 .map(employee -> employeeMapper.toResponse(employee))
                 .collect(Collectors.toList());
     }
@@ -70,7 +67,7 @@ public class EmployeeController {
         boolean isRemoved;
 
         try {
-            isRemoved = this.employeeService.deleteEmployeeById(id);
+            isRemoved = employeeService.deleteEmployeeById(id);
         } catch (EmployeeNotFoundException e) {
             return new ResponseEntity<>(e.getMessage() + " ID:  " + id, HttpStatus.NOT_FOUND);
         }

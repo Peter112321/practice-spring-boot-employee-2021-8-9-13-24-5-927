@@ -19,7 +19,7 @@ public class CompanyMapper {
 
     public Company toEntity(CompanyRequest companyRequest) {
         Company company = new Company();
-        company.setCompanyName(company.getCompanyName());
+        company.setCompanyName(companyRequest.getName());
         return company;
     }
 

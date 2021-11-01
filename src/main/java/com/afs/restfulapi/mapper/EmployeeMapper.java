@@ -19,7 +19,6 @@ public class EmployeeMapper {
 
 //        BeanUtils.copyProperties(employeeRequest,employee);
 
-
         return employee;
     }
 
@@ -30,8 +29,6 @@ public class EmployeeMapper {
 //        employeeResponse.setGender(employeeResponse.getGender());
 //        employeeResponse.setId(employeeResponse.getId());
 //        employeeResponse.setName(employeeResponse.getName());
-
-
         BeanUtils.copyProperties(employee,employeeResponse);
 
         return employeeResponse;

@@ -85,17 +85,5 @@ public class Employee {
     }
 
 
-    //todo find out what's happening in this method
-//    @Override
 
-//    public boolean equals(Object o) {
-//        if (this == o) {
-//            return true;
-//        }
-//        if (o instanceof Employee) {
-//            Employee employee = (Employee) o;
-//            return this.id.equals(((Employee) o).id);
-//        }
-//        return false;
-//    }
 }

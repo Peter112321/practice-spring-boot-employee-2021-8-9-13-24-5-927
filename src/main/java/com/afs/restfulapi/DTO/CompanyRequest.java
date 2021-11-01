@@ -1,6 +1,7 @@
 package com.afs.restfulapi.DTO;
 
 public class CompanyRequest {
+    //todo rename
     private String Name;
 
     public CompanyRequest() {

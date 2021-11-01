@@ -5,7 +5,7 @@ public class ErrorResponse {
     private String msg;
 
 
-    //todo
+
     public Integer getHttpCode() {
         return httpCode;
     }

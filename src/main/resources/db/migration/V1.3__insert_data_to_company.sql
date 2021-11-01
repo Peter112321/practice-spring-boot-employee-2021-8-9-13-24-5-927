@@ -1,1 +1,1 @@
-insert into company (companyName) values ('alibaba');
+insert into company (company_name) values ('alibaba');

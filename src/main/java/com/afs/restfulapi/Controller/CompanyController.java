@@ -56,8 +56,8 @@ public class CompanyController {
     }
 
     @PostMapping
-    public Company createCompany(@RequestBody CompanyRequest companyRequest) {
-        return companyService.addCompany(companyMapper.toEntity(companyRequest));
+    public CompanyResponse createCompany(@RequestBody CompanyRequest companyRequest) {
+        return companyMapper.toResponse(companyService.addCompany(companyMapper.toEntity(companyRequest)));
 
     }
 

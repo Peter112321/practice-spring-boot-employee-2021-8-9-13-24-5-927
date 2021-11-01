@@ -33,7 +33,6 @@ public class CompanyService {
         public List<Employee> getEmployeeListInCompanyById(int id) {
         return this.employeeRepository.findAllByCompanyId(id);
   }
-    //todo try previous method
     public Page<Company> getCompanyListByPage(int page, int pageSize) {
         return this.companyRepository.findAll(PageRequest.of(page, pageSize));
     }

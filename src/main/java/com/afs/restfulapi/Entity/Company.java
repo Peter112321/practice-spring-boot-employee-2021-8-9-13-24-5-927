@@ -4,6 +4,7 @@ import net.bytebuddy.dynamic.loading.InjectionClassLoader;
 import org.springframework.context.annotation.Primary;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -15,12 +16,14 @@ public class Company {
     @OneToMany(mappedBy = "companyId")
     private List<Employee> companyEmployee;
 
+
     public Company( String companyName) {
-        this.companyId=null;
         this.companyName = companyName;
+
     }
 
     public Company() {
+        this.companyEmployee = new ArrayList<>();
     }
 
     public Integer getCompanyId() {
